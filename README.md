@@ -2,7 +2,7 @@
 
 Personal portfolio website showcasing my work, experience and skills as a Software Engineer and AI/ML Engineer.
 
-**Live →** [saikannan.dev](https://saikannan.dev)
+**Live →** [saikannan-portfolio.vercel.app](https://saikannan-portfolio.vercel.app)
 
 ---
 

@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import { Grain, ScrollProgress, CursorDot } from "@/components/ui";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://saikannan.dev";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://saikannan-portfolio.vercel.app";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
