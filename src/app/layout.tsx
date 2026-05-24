@@ -52,16 +52,16 @@ export const metadata: Metadata = {
     locale:      "en_US",
     url:         siteUrl,
     siteName:    "Saikannan Sathish",
-    title:       "Saikannan Sathish — Software Engineer",
+    title:       "Saikannan Sathish — Software Engineer & AI/ML Engineer",
     description:
-      "MS Computer Science (AI) at Binghamton University. Building AI-powered products and scalable systems.",
+      "MS Computer Science student specializing in AI at Binghamton University. I build production ML systems, RAG pipelines, recommendation engines and full-stack AI products. Open to roles in 2026.",
   },
 
   twitter: {
     card:        "summary_large_image",
-    title:       "Saikannan Sathish — Software Engineer",
+    title:       "Saikannan Sathish — Software Engineer & AI/ML Engineer",
     description:
-      "MS Computer Science (AI) at Binghamton University. Building AI-powered products and scalable systems.",
+      "MS Computer Science student specializing in AI at Binghamton University. I build production ML systems, RAG pipelines, recommendation engines and full-stack AI products. Open to roles in 2026.",
   },
 
   robots: {

@@ -135,20 +135,26 @@ export default function Image() {
           </span>
         </div>
 
-        {/* GitHub — bottom right */}
+        {/* CTA — bottom right */}
         <div
           style={{
             position: "absolute",
-            bottom: 56,
+            bottom: 52,
             right: 80,
             display: "flex",
+            alignItems: "center",
+            gap: 12,
+            padding: "10px 22px",
+            border: "1px solid rgba(99,102,241,0.5)",
+            borderRadius: 999,
             fontSize: 13,
-            color: "#444444",
+            color: "#818CF8",
             fontFamily: "monospace",
-            letterSpacing: "0.08em",
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
           }}
         >
-          github.com/Saikannan1805
+          View Portfolio →
         </div>
       </div>
     ),
