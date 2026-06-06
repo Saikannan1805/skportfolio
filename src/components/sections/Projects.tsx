@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import SectionLabel from "@/components/ui/SectionLabel";
@@ -37,6 +38,7 @@ const PROJECTS: Project[] = [
     ),
     tags: ["FastAPI", "RAG", "OpenAI", "pgvector", "React"],
     github: "https://github.com/Saikannan1805/basic-rag-assistant",
+    image: "/rag-chat.png",
     featured: true,
   },
   {
@@ -133,6 +135,14 @@ export default function Projects() {
                     loop
                     playsInline
                     className="absolute inset-0 h-full w-full object-cover"
+                  />
+                ) : project.image ? (
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} screenshot`}
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 ) : (
                   <span className="absolute left-4 top-4 font-mono text-xs tracking-widest text-text-tertiary">
