@@ -3,6 +3,7 @@ import type React from "react";
 export interface Project {
   id: string;
   title: string;
+  subtitle?: string;
   description: React.ReactNode;
   tags: string[];
   href?: string;

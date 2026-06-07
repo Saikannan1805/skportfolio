@@ -14,29 +14,37 @@ const H = ({ children }: { children: React.ReactNode }) => (
 const PROJECTS: Project[] = [
   {
     id: "gitwise",
-    title: "Gitwise",
+    title: "Gitwise AI",
+    subtitle: "Agentic Code Intelligence System",
     description: (
       <>
-        AI agent that analyzes any GitHub repository for architecture, security risks and code quality{" "}
-        <H>in 30–90 seconds.</H> Built with a{" "}
-        <H>multi-agent LangGraph pipeline,</H> vector-based code retrieval and a production Next.js interface.
+        Production-deployed AI agent that analyzes any GitHub repository end-to-end. Clones the repo,{" "}
+        <H>embeds into pgvector</H> using HuggingFace transformers and runs a{" "}
+        <H>6-node LangGraph pipeline</H> to stream four reports live - Architecture Mapping,{" "}
+        Security Scanning with severity scores, <H>Code Quality Grading (A-F)</H> and README generation.{" "}
+        RAG chat lets users query the codebase with <H>file and line-level citations.</H>
       </>
     ),
-    tags: ["LangGraph", "RAG", "LLaMA 3.3-70B", "FastAPI", "Next.js"],
+    tags: ["LangGraph", "RAG", "Groq LLaMA-3.3-70B", "FastAPI", "pgvector", "Next.js"],
     href: "https://gitwiseai.vercel.app",
+    github: "https://github.com/Saikannan1805/github-agent",
     video: "/gitwise-demo.mp4",
     featured: true,
   },
   {
     id: "hybrid-rag",
-    title: "Hybrid Knowledge Assistant",
+    title: "Hybrid RAG System",
+    subtitle: "Semantic Document Q&A Engine",
     description: (
       <>
-        <H>RAG system</H> with citation-aware Q&A over private document corpora. Handles{" "}
-        <H>multi-document ingestion, semantic chunking</H> and precise source attribution for enterprise knowledge retrieval.
+        Full-stack <H>Retrieval Augmented Generation</H> system for document-based Q&A. Handles end-to-end{" "}
+        <H>document ingestion, chunking, embedding</H> via OpenAI and semantic retrieval over Supabase pgvector.{" "}
+        FastAPI backend exposes REST endpoints for document upload and{" "}
+        <H>contextual question answering with citation tracking.</H> Next.js frontend for user interaction.
       </>
     ),
-    tags: ["FastAPI", "RAG", "OpenAI", "pgvector", "React"],
+    tags: ["OpenAI Embeddings", "Supabase pgvector", "FastAPI", "Next.js", "Python"],
+    href: "https://rag-assist-system.vercel.app/",
     github: "https://github.com/Saikannan1805/basic-rag-assistant",
     image: "/rag-chat.png",
     featured: true,
@@ -44,13 +52,16 @@ const PROJECTS: Project[] = [
   {
     id: "courser-ai",
     title: "Courser AI",
+    subtitle: "Full-Stack EdTech AI Platform",
     description: (
       <>
-        AI-powered course planning platform built <H>0→1 as founding engineer.</H> Integrates{" "}
-        <H>multiple LLMs via OpenRouter</H> for intelligent academic planning with a full-stack React + Flask + PostgreSQL architecture.
+        Built <H>0→1 as founding engineer</H> - full-stack AI platform for automated syllabus generation using{" "}
+        <H>LLM pipelines.</H> Integrated <H>OpenRouter and Gemini APIs</H> for real-time content generation and editing.{" "}
+        Flask + PostgreSQL backend deployed on Railway. Shipped bulk CSV import, resource management and enrollment workflows,{" "}
+        <H>onboarding early users</H> and iterating on feedback.
       </>
     ),
-    tags: ["React", "Flask", "PostgreSQL", "Gemini API", "OpenRouter"],
+    tags: ["OpenRouter", "Gemini API", "React", "Flask", "PostgreSQL"],
     featured: true,
   },
 ];
@@ -167,6 +178,12 @@ export default function Projects() {
                 <h3 className="font-sans text-base font-semibold text-text-primary transition-colors duration-200 group-hover:text-accent">
                   {project.title}
                 </h3>
+
+                {project.subtitle && (
+                  <p className="mt-0.5 font-mono text-xs tracking-widest uppercase text-text-tertiary">
+                    {project.subtitle}
+                  </p>
+                )}
 
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-text-secondary">
                   {project.description}

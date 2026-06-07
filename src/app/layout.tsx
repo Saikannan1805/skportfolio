@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
-import { Grain, ScrollProgress, CursorDot } from "@/components/ui";
+import { Grain, ScrollProgress, CursorDot, LinkedInButton } from "@/components/ui";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://saikannan-portfolio.vercel.app";
@@ -144,6 +144,7 @@ export default function RootLayout({
         <Grain />
         <ScrollProgress />
         <CursorDot />
+        <LinkedInButton />
         {children}
       </body>
     </html>

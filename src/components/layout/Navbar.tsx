@@ -113,6 +113,7 @@ export default function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             className="border-shimmer inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 md:px-4 font-mono text-xs tracking-widest uppercase text-text-secondary hover:text-accent transition-colors duration-200"
+            style={{ boxShadow: "0 0 16px rgba(99, 102, 241, 0.35), 0 0 32px rgba(99, 102, 241, 0.15)" }}
           >
             Resume ↗
           </a>
