@@ -5,7 +5,13 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
 import Button from "@/components/ui/Button";
 
-const FEATURED_TAGS = ["LangGraph", "RAG", "FastAPI", "Next.js"];
+const FEATURED_TAGS = ["LangGraph", "RAG", "Groq LLaMA-3.3-70B", "FastAPI", "pgvector", "Next.js"];
+
+const FEATURED_STATS = [
+  { label: "Pipeline nodes", value: "6-node" },
+  { label: "Live reports", value: "4 reports" },
+  { label: "Analysis time", value: "30–90s" },
+];
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -179,21 +185,31 @@ export default function Hero() {
 
                 {/* Title */}
                 <h3 className="font-display text-2xl font-bold text-text-primary">
-                  Gitwise
+                  Gitwise AI
                 </h3>
                 <p className="mt-0.5 font-mono text-xs tracking-wide text-text-tertiary">
-                  AI Codebase Intelligence
+                  Agentic Code Intelligence System
                 </p>
 
                 {/* Description */}
                 <p className="mt-4 text-sm leading-relaxed text-text-secondary">
-                  AI agent that analyzes any GitHub repository for architecture,
-                  security and code quality{" "}
-                  <span className="text-text-primary font-medium">in 30–90 seconds.</span>
+                  Streams <span className="text-text-primary font-medium">real-time codebase intelligence</span> -
+                  architecture mapping, security scanning and code grading with{" "}
+                  <span className="text-text-primary font-medium">RAG-powered repo chat.</span>
                 </p>
 
+                {/* Stat strip */}
+                <div className="mt-5 grid grid-cols-3 divide-x divide-border rounded-xl border border-border bg-background/60 px-1 py-3">
+                  {FEATURED_STATS.map((stat) => (
+                    <div key={stat.label} className="flex flex-col items-center gap-0.5 px-2">
+                      <span className="font-mono text-xs font-semibold text-accent">{stat.value}</span>
+                      <span className="font-mono text-[9px] tracking-wide text-text-tertiary text-center">{stat.label}</span>
+                    </div>
+                  ))}
+                </div>
+
                 {/* Tags */}
-                <div className="mt-5 flex flex-wrap gap-1.5">
+                <div className="mt-4 flex flex-wrap gap-1.5">
                   {FEATURED_TAGS.map((tag) => (
                     <span
                       key={tag}
@@ -207,16 +223,25 @@ export default function Hero() {
                 {/* Divider */}
                 <div className="my-5 h-px w-full bg-border" />
 
-                {/* Link */}
-                <a
-                  href="https://gitwiseai.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 font-mono text-xs tracking-widest uppercase text-accent transition-colors duration-200 hover:text-accent-light"
-                >
-                  View Live
-                  <span>↗</span>
-                </a>
+                {/* Links */}
+                <div className="flex items-center gap-5">
+                  <a
+                    href="https://gitwiseai.vercel.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 font-mono text-xs tracking-widest uppercase text-accent transition-colors duration-200 hover:text-accent-light"
+                  >
+                    View Live ↗
+                  </a>
+                  <a
+                    href="https://github.com/Saikannan1805/github-agent"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 font-mono text-xs tracking-widest uppercase text-text-tertiary transition-colors duration-200 hover:text-text-secondary"
+                  >
+                    GitHub ↗
+                  </a>
+                </div>
               </div>
             </div>
           </div>
