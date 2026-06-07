@@ -11,6 +11,7 @@ const H = ({ children }: { children: React.ReactNode }) => (
   <span className="text-text-primary font-medium">{children}</span>
 );
 
+
 const PROJECTS: Project[] = [
   {
     id: "gitwise",
@@ -62,6 +63,16 @@ const PROJECTS: Project[] = [
       </>
     ),
     tags: ["OpenRouter", "Gemini API", "React", "Flask", "PostgreSQL"],
+    customMedia: (
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span
+          className="font-mono text-5xl font-bold text-accent select-none"
+          style={{ textShadow: "0 0 40px rgba(99,102,241,0.6), 0 0 80px rgba(99,102,241,0.3)" }}
+        >
+          {"< / >"}
+        </span>
+      </div>
+    ),
     featured: true,
   },
 ];
@@ -115,14 +126,6 @@ export default function Projects() {
           <h2 className="font-display text-4xl font-bold text-text-primary lg:text-5xl">
             Selected work
           </h2>
-          <a
-            href="https://github.com/Saikannan1805"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-mono text-xs tracking-widest uppercase text-text-tertiary hover:text-accent transition-colors duration-200"
-          >
-            All projects ↗
-          </a>
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
@@ -155,6 +158,8 @@ export default function Projects() {
                     className="object-cover object-top"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
+                ) : project.customMedia ? (
+                  project.customMedia
                 ) : (
                   <span className="absolute left-4 top-4 font-mono text-xs tracking-widest text-text-tertiary">
                     {String(index + 1).padStart(2, "0")}

@@ -12,15 +12,19 @@ const STACK = [
   },
   {
     category: "AI / ML",
-    items: ["PyTorch", "TensorFlow", "LangGraph", "LangChain", "RAG", "Scikit-learn"],
+    items: ["LangGraph", "RAG", "PyTorch", "TensorFlow", "LangChain", "HuggingFace", "Scikit-learn", "OpenCV"],
+  },
+  {
+    category: "LLM APIs",
+    items: ["Groq", "OpenAI", "Gemini API", "OpenRouter"],
   },
   {
     category: "Frameworks",
-    items: ["FastAPI", "Flask", "React.js", "Next.js", "Flutter", "Tailwind CSS"],
+    items: ["FastAPI", "Next.js", "React.js", "Flask", "Tailwind CSS", "Angular", "Flutter"],
   },
   {
     category: "Databases",
-    items: ["PostgreSQL", "Supabase", "MongoDB", "Firebase", "pgvector", "MySQL"],
+    items: ["pgvector", "PostgreSQL", "Supabase", "MongoDB", "MySQL", "Firebase"],
   },
   {
     category: "Cloud & DevOps",
@@ -81,7 +85,7 @@ export default function Stack() {
         <SectionLabel index="02" label="Tech Stack" />
 
         <h2 className="gsap-heading font-display text-4xl font-bold text-text-primary lg:text-5xl">
-          Tools of the trade
+          The Stack
         </h2>
 
         <p className="gsap-desc mt-4 max-w-xl text-text-secondary leading-relaxed">
@@ -97,7 +101,7 @@ export default function Stack() {
               className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-8"
             >
               <div className="w-36 flex-shrink-0 pt-1">
-                <p className="font-mono text-xs tracking-widest uppercase text-text-secondary">
+                <p className="font-mono text-xs tracking-widest uppercase text-text-primary">
                   {group.category}
                 </p>
               </div>

@@ -10,6 +10,7 @@ export interface Project {
   github?: string;
   image?: string;
   video?: string;
+  customMedia?: React.ReactNode;
   featured?: boolean;
 }
 
