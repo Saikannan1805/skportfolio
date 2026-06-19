@@ -122,11 +122,11 @@ export default function Hero() {
             {/* Role + degree + location */}
             <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-1">
               <span className="hero-meta font-sans text-lg font-light text-text-secondary">
-                Software Engineer
+                AI Engineer · Software Engineer
               </span>
               <span className="hero-meta hidden h-1 w-1 rounded-full bg-text-tertiary sm:block" />
               <span className="hero-meta font-sans text-lg font-light text-text-secondary">
-                MS Computer Science · AI
+                MS CS · Binghamton University
               </span>
               <span className="hero-meta hidden h-1 w-1 rounded-full bg-text-tertiary sm:block" />
               <span className="hero-meta font-mono text-sm text-text-tertiary">
@@ -137,10 +137,10 @@ export default function Hero() {
             {/* Bio */}
             <p className="hero-bio mt-5 max-w-lg text-base leading-relaxed text-text-secondary">
               <span className="text-text-primary font-medium">Founding engineer</span> at{" "}
-              <span className="text-text-primary font-medium">2 AI startups.</span> I build{" "}
-              <span className="text-text-primary font-medium">production ML systems</span>:{" "}
-              <span className="text-text-primary font-medium">RAG pipelines, recommendation engines</span> and{" "}
-              <span className="text-text-primary font-medium">full-stack AI products.</span>
+              <span className="text-text-primary font-medium">2 AI startups</span> — shipping{" "}
+              <span className="text-text-primary font-medium">LangGraph agents</span>,{" "}
+              <span className="text-text-primary font-medium">RAG pipelines</span> and{" "}
+              <span className="text-text-primary font-medium">full-stack ML systems</span> to production.
             </p>
 
             {/* Divider */}
@@ -152,7 +152,7 @@ export default function Hero() {
                 View Work
               </Button>
               <Button className="hero-cta" href="#contact" variant="ghost">
-                Get in Touch
+                Let&apos;s Talk
               </Button>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { Grain, ScrollProgress, CursorDot, LinkedInButton } from "@/components/ui";
 import "./globals.css";
 
@@ -146,6 +147,7 @@ export default function RootLayout({
         <CursorDot />
         <LinkedInButton />
         {children}
+        <Analytics />
       </body>
     </html>
   );
