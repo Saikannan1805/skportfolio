@@ -1,15 +1,5 @@
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: { absolute: "Saikannan Sathish Resume" },
-};
+import { redirect } from "next/navigation";
 
 export default function ResumePage() {
-  return (
-    <iframe
-      src="/SaikannanSathish_Resume.pdf"
-      className="fixed inset-0 h-full w-full border-0"
-      title="Saikannan Sathish Resume"
-    />
-  );
+  redirect("https://drive.google.com/file/d/1IvE1iQHkGxmqnih9S3mp9QhSw5b8Lfex/view?usp=sharing");
 }
