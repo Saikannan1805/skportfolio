@@ -8,23 +8,23 @@ import Badge from "@/components/ui/Badge";
 const STACK = [
   {
     category: "Languages",
-    items: ["Python", "JavaScript", "Java", "C++", "Dart", "SQL"],
+    items: ["Python", "JavaScript", "SQL", "TypeScript"],
   },
   {
     category: "AI / ML",
-    items: ["LangGraph", "RAG", "PyTorch", "TensorFlow", "LangChain", "HuggingFace", "Scikit-learn", "OpenCV"],
+    items: ["LangGraph", "RAG", "LLMs", "LLaMA", "Recommendation Systems", "NLP", "RAGAS", "BM25", "PyTorch", "TensorFlow", "LangChain", "HuggingFace", "Scikit-learn", "OpenCV"],
   },
   {
     category: "LLM APIs",
-    items: ["Groq", "OpenAI", "Gemini API", "OpenRouter"],
+    items: ["Groq", "OpenAI"],
   },
   {
     category: "Frameworks",
-    items: ["FastAPI", "Next.js", "React.js", "Flask", "Tailwind CSS", "Angular", "Flutter"],
+    items: ["FastAPI", "Next.js", "React.js", "Flask", "Tailwind CSS"],
   },
   {
     category: "Databases",
-    items: ["pgvector", "PostgreSQL", "Supabase", "MongoDB", "MySQL", "Firebase"],
+    items: ["pgvector", "PostgreSQL", "Supabase", "Redis", "BigQuery", "MongoDB", "MySQL", "Firebase"],
   },
   {
     category: "Cloud & DevOps",

@@ -88,22 +88,22 @@ export default function About() {
 
             <div className="space-y-4 text-text-secondary leading-relaxed">
               <p className="gsap-text">
-                I&apos;m a Computer Science Master&apos;s student specializing in AI at
-                Binghamton University. While doing that, I&apos;ve shipped AI-powered
-                products across{" "}
-                <span className="text-text-primary font-medium">three companies</span>{" "}
-                including{" "}
-                <span className="text-text-primary font-medium">two founding engineer roles</span>.
-                I build{" "}
-                <span className="text-text-primary font-medium">multi-agent LLM pipelines</span>,
-                deploy{" "}
-                <span className="text-text-primary font-medium">real-time inference systems</span>{" "}
-                and work across the full ML stack.
+                I am a Computer Science Master&apos;s student specializing in AI at
+                Binghamton University.
               </p>
               <p className="gsap-text">
-                For me it&apos;s not just the model. The architecture, the product thinking
-                and the engineering discipline all matter. I want to work on a team where
-                I can own hard problems from start to finish.
+                I have shipped AI-powered products across{" "}
+                <span className="text-text-primary font-medium">multiple companies</span>,
+                building{" "}
+                <span className="text-text-primary font-medium">multi-agent LLM pipelines</span>,
+                deploying{" "}
+                <span className="text-text-primary font-medium">real-time inference systems</span>{" "}
+                and working across the full ML stack.
+              </p>
+              <p className="gsap-text">
+                It is not just the model. The architecture, the product thinking
+                and the engineering discipline all matter. I take problems from
+                design to deployment and own the outcome end to end.
               </p>
             </div>
 
@@ -131,7 +131,7 @@ export default function About() {
               <div className="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl border border-accent/20" />
               <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl border border-border bg-surface">
                 <img
-                  src="/photo.jpg"
+                  src="/photo.png"
                   alt="Saikannan Sathish"
                   className="absolute inset-0 h-full w-full object-cover"
                 />

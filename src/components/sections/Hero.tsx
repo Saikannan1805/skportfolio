@@ -136,8 +136,8 @@ export default function Hero() {
 
             {/* Bio */}
             <p className="hero-bio mt-5 max-w-lg text-base leading-relaxed text-text-secondary">
-              <span className="text-text-primary font-medium">Founding engineer</span> at{" "}
-              <span className="text-text-primary font-medium">2 AI startups</span> — shipping{" "}
+              <span className="text-text-primary font-medium">Early engineer</span> at{" "}
+              <span className="text-text-primary font-medium">AI startups</span> — shipping{" "}
               <span className="text-text-primary font-medium">LangGraph agents</span>,{" "}
               <span className="text-text-primary font-medium">RAG pipelines</span> and{" "}
               <span className="text-text-primary font-medium">full-stack ML systems</span> to production.

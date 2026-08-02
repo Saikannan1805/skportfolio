@@ -6,40 +6,29 @@ import SectionLabel from "@/components/ui/SectionLabel";
 import type { Experience as ExperienceType } from "@/types";
 
 const H = ({ children }: { children: React.ReactNode }) => (
-  <span className="text-text-primary font-medium">{children}</span>
+  <span className="mx-1 text-text-primary font-medium">{children}</span>
 );
 
 const TIMELINE: ExperienceType[] = [
   {
-    id: "courser-ai",
-    role: "Founding Engineer",
-    company: "Courser AI",
-    period: "Jan 2026 – Present",
-    description: [
-      <>Built <H>AI-powered course planning platform from 0→1</H>. Owned architecture, frontend and deployment</>,
-      <>Integrated <H>Gemini API + OpenRouter</H> for multi-model LLM orchestration within a React + Flask + PostgreSQL stack</>,
-    ],
-    type: "work",
-  },
-  {
     id: "uplifty",
     role: "ML Engineer Lead",
     company: "Uplifty AI",
-    period: "Aug 2025 – Present",
+    period: "Aug 2025 – May 2026",
     description: [
-      <>Designed and deployed <H>personalized recommendation engine</H> using collaborative filtering and user embeddings</>,
-      <>Built <H>real-time inference pipeline</H> with FastAPI + Supabase + PostgreSQL on Google Cloud Run</>,
+      <>Designed a <H>two-stage recommendation pipeline</H> using ANN retrieval and a multi-task LightGBM ranker, serving personalized feeds at sub-100ms latency</>,
+      <>Built an <H>online and offline feature store</H> using Redis and BigQuery, eliminating training-serving skew across the ranking pipeline</>,
     ],
     type: "work",
   },
   {
-    id: "sellularity",
-    role: "Founding Engineer",
-    company: "Sellularity",
-    period: "Jan 2025 – May 2025",
+    id: "pisence",
+    role: "AI Engineer",
+    company: "PiSence Technologies",
+    period: "Dec 2023 – Jul 2024",
     description: [
-      <>Built <H>healthcare data exchange platform</H> using Flask, Angular and AWS (KMS, RDS, ECS)</>,
-      <>Implemented <H>AWS KMS key management</H> for PHI data security and compliance</>,
+      <>Architected a <H>6-node multi-agent RAG system</H> using LangGraph with hybrid pgvector and BM25 retrieval, cutting hallucination by 40%</>,
+      <>Migrated 80% of inference to <H>Groq-hosted LLaMA-3.3</H> and built a RAGAS evaluation suite across 400 test cases, reducing cost by 80%</>,
     ],
     type: "work",
   },
@@ -49,7 +38,7 @@ const TIMELINE: ExperienceType[] = [
     company: "Verzeo",
     period: "Dec 2022 – Feb 2023",
     description: [
-      <>Built gesture recognition system achieving <H>92% accuracy</H> using TensorFlow and OpenCV</>,
+      <>Built a real-time <H>hand gesture recognition model</H> using TensorFlow and OpenCV, achieving 92% accuracy</>,
     ],
     type: "work",
   },
@@ -59,7 +48,7 @@ const TIMELINE: ExperienceType[] = [
     company: "Qurinom Solutions",
     period: "Jan 2022 – Mar 2022",
     description: [
-      <>Built <H>cross-platform Flutter app</H> with Firebase authentication and real-time backend workflows</>,
+      <>Architected a <H>full-stack mobile app</H> using Flutter and Firebase with authentication and state management</>,
     ],
     type: "work",
   },
@@ -136,7 +125,7 @@ function TimelineEntry({ item }: { item: ExperienceType }) {
             {item.description.map((line, i) => (
               <li key={i} className="flex items-start gap-2.5 text-sm text-text-secondary">
                 <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-text-tertiary" />
-                {line}
+                <span>{line}</span>
               </li>
             ))}
           </ul>

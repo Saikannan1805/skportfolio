@@ -87,19 +87,21 @@ export default function Contact() {
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="font-display text-5xl font-bold leading-tight text-text-primary md:text-7xl">
             <span className="block overflow-hidden py-1">
-              <span className="gsap-line inline-block">Let&apos;s build</span>
+              <span className="gsap-line inline-block">Ready to</span>
             </span>
             <span className="block overflow-hidden py-1">
-              <span className="gsap-line inline-block text-accent">something great.</span>
+              <span className="gsap-line inline-block text-accent">build.</span>
             </span>
           </h2>
 
           <p className="gsap-desc mt-6 text-base leading-relaxed text-text-secondary">
-            I&apos;m actively looking for{" "}
-            <span className="text-text-primary font-medium">full-time software engineering and AI/ML roles</span>{" "}
-            starting 2026. Open to{" "}
-            <span className="text-text-primary font-medium">internships</span>{" "}
-            too. If you see a fit, reach out.
+            I am actively looking for{" "}
+            <span className="text-text-primary font-medium">full-time AI/ML Engineer roles</span>.
+            I am{" "}
+            <span className="text-text-primary font-medium">authorized to work in the US</span>{" "}
+            and available to start{" "}
+            <span className="text-text-primary font-medium">immediately after August 2026</span>.
+            If you see a fit, reach out.
           </p>
 
           <div className="gsap-cta mt-8 flex justify-center">

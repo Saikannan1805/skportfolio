@@ -20,13 +20,14 @@ const PROJECTS: Project[] = [
     description: (
       <>
         Production-deployed AI agent that analyzes any GitHub repository end-to-end. Clones the repo,{" "}
-        <H>embeds into pgvector</H> using HuggingFace transformers and runs a{" "}
-        <H>6-node LangGraph pipeline</H> to stream four reports live - Architecture Mapping,{" "}
+        <H>embeds into pgvector</H> and runs a{" "}
+        <H>6-node LangGraph pipeline</H> to stream four live reports via SSE - Architecture Mapping,{" "}
         Security Scanning with severity scores, <H>Code Quality Grading (A-F)</H> and README generation.{" "}
-        RAG chat lets users query the codebase with <H>file and line-level citations.</H>
+        RAG chat enables users to query the codebase with exact{" "}
+        <H>file and line-level citations</H> via Groq LLaMA-3.3-70B.
       </>
     ),
-    tags: ["LangGraph", "RAG", "Groq LLaMA-3.3-70B", "FastAPI", "pgvector", "Next.js"],
+    tags: ["LangGraph", "RAG", "Groq", "LLaMA-3.3", "pgvector", "Supabase", "FastAPI", "SSE", "Next.js"],
     href: "https://gitwiseai.vercel.app",
     github: "https://github.com/Saikannan1805/github-agent",
     video: "/gitwise-demo.mp4",
@@ -38,13 +39,14 @@ const PROJECTS: Project[] = [
     subtitle: "Semantic Document Q&A Engine",
     description: (
       <>
-        Full-stack <H>Retrieval Augmented Generation</H> system for document-based Q&A. Handles end-to-end{" "}
-        <H>document ingestion, chunking, embedding</H> via OpenAI and semantic retrieval over Supabase pgvector.{" "}
+        Document Q&A system built on a <H>modular RAG pipeline</H>. Handles end-to-end{" "}
+        <H>ingestion, chunking and embedding</H> via OpenAI into Supabase pgvector.{" "}
         FastAPI backend exposes REST endpoints for document upload and{" "}
-        <H>contextual question answering with citation tracking.</H> Next.js frontend for user interaction.
+        <H>contextual question answering with citation tracking and confidence scoring</H>.{" "}
+        Streamed responses end-to-end via SSE to a Next.js frontend.
       </>
     ),
-    tags: ["OpenAI Embeddings", "Supabase pgvector", "FastAPI", "Next.js", "Python"],
+    tags: ["RAG", "OpenAI", "pgvector", "Supabase", "FastAPI", "SSE", "Next.js"],
     href: "https://rag-assist-system.vercel.app/",
     github: "https://github.com/Saikannan1805/basic-rag-assistant",
     image: "/rag-chat.png",
@@ -169,7 +171,7 @@ export default function Projects() {
               </div>
 
               <div className="flex flex-1 flex-col p-6">
-                <div className="mb-4 flex flex-wrap gap-1.5">
+                <div className="mb-4 flex min-h-[5.75rem] flex-wrap content-start gap-1.5">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
