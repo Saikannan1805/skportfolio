@@ -75,12 +75,6 @@ export default function Contact() {
       id="contact"
       className="relative py-section overflow-hidden"
     >
-      <div
-        className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[140px]"
-        style={{ background: "rgba(99, 102, 241, 0.08)" }}
-        aria-hidden
-      />
-
       <div className="relative z-10 mx-auto max-w-6xl px-6">
         <SectionLabel index="05" label="Contact" />
 
@@ -96,11 +90,11 @@ export default function Contact() {
 
           <p className="gsap-desc mt-6 text-base leading-relaxed text-text-secondary">
             I am actively looking for{" "}
-            <span className="text-text-primary font-medium">full-time AI/ML Engineer roles</span>.
+            <span className="text-text-primary font-medium">full-time AI Engineer and Software Engineer roles</span>.
             I am{" "}
             <span className="text-text-primary font-medium">authorized to work in the US</span>{" "}
             and available to start{" "}
-            <span className="text-text-primary font-medium">immediately after August 2026</span>.
+            <span className="text-text-primary font-medium">in December 2026</span>.
             If you see a fit, reach out.
           </p>
 
@@ -123,10 +117,10 @@ export default function Contact() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="gsap-social group flex items-center gap-1.5 font-mono text-xs tracking-widest uppercase text-text-secondary hover:text-text-primary transition-colors duration-200"
+                className="gsap-social group flex items-center gap-1.5 font-mono text-xs tracking-widest uppercase text-text-secondary hover:text-text-primary transition-colors duration-[450ms] ease-butter"
               >
                 {link.label}
-                <span className="opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                <span className="opacity-0 transition-[opacity,translate] duration-[450ms] ease-butter group-hover:opacity-100 group-hover:translate-x-0.5">
                   ↗
                 </span>
               </a>

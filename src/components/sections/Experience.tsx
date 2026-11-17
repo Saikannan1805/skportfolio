@@ -3,22 +3,46 @@
 import React, { useRef, useEffect } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import SectionLabel from "@/components/ui/SectionLabel";
+import ToolList from "@/components/ui/ToolList";
 import type { Experience as ExperienceType } from "@/types";
 
 const H = ({ children }: { children: React.ReactNode }) => (
-  <span className="mx-1 text-text-primary font-medium">{children}</span>
+  <span className="text-text-primary font-medium">{children}</span>
 );
 
-const TIMELINE: ExperienceType[] = [
+/* Metrics get the accent tint so they pop on a skim */
+const M = ({ children }: { children: React.ReactNode }) => (
+  <span className="font-semibold text-accent">{children}</span>
+);
+
+const WORK: ExperienceType[] = [
+  {
+    id: "colaberry",
+    role: "AI Engineer Intern",
+    company: "Colaberry",
+    period: "Sep 2026 – Present",
+    current: true,
+    tagline: "A voice AI agent that holds natural conversations in 6 languages",
+    description: [
+      <>Built a <H>real-time voice agent</H> on LiveKit, LangGraph and MCP, in English and 5 Indian languages</>,
+      <>Cut response latency <M>43.5%</M> by <H>streaming LLM output into speech</H></>,
+      <>Created an <H>LLM evaluation suite</H> to test latency, tool calls and interruptions</>,
+    ],
+    stack: ["Python", "LiveKit", "WebRTC", "LangGraph", "FastMCP", "OpenAI", "Groq", "Sarvam AI", "Redis", "PostgreSQL"],
+    type: "work",
+  },
   {
     id: "uplifty",
-    role: "ML Engineer Lead",
+    role: "ML Engineer Lead Intern",
     company: "Uplifty AI",
     period: "Aug 2025 – May 2026",
+    tagline: "Personalized recommendations served in under 100 ms",
     description: [
-      <>Designed a <H>two-stage recommendation pipeline</H> using ANN retrieval and a multi-task LightGBM ranker, serving personalized feeds at sub-100ms latency</>,
-      <>Built an <H>online and offline feature store</H> using Redis and BigQuery, eliminating training-serving skew across the ranking pipeline</>,
+      <>Designed a <H>two-stage recommendation pipeline</H> with ANN retrieval and a LightGBM ranker</>,
+      <>Fixed <H>position bias</H> in training data with inverse propensity scoring</>,
+      <>Split <H>online and offline feature stores</H> (Redis, BigQuery) to end training-serving skew</>,
     ],
+    stack: ["Python", "LightGBM", "ANN retrieval", "Redis", "BigQuery", "A/B testing"],
     type: "work",
   },
   {
@@ -26,129 +50,104 @@ const TIMELINE: ExperienceType[] = [
     role: "AI Engineer",
     company: "PiSence Technologies",
     period: "Dec 2023 – Jul 2024",
+    tagline: "Accurate, low-cost answers from a multi-agent RAG system",
     description: [
-      <>Architected a <H>6-node multi-agent RAG system</H> using LangGraph with hybrid pgvector and BM25 retrieval, cutting hallucination by 40%</>,
-      <>Migrated 80% of inference to <H>Groq-hosted LLaMA-3.3</H> and built a RAGAS evaluation suite across 400 test cases, reducing cost by 80%</>,
+      <>Architected a <H>6-node multi-agent RAG system</H> on LangGraph, cutting hallucinations <M>40%</M></>,
+      <>Cut inference cost <M>80%</M> by moving to <H>Groq-hosted LLaMA-3.3</H></>,
+      <>Built a <H>RAGAS evaluation suite</H> of 400 tests that runs on every pull request</>,
     ],
+    stack: ["Python", "LangGraph", "pgvector", "BM25", "Groq", "LLaMA-3.3", "RAGAS"],
     type: "work",
   },
   {
     id: "verzeo",
-    role: "AI/ML Engineer Intern",
+    role: "AIML Engineer Intern",
     company: "Verzeo",
     period: "Dec 2022 – Feb 2023",
+    tagline: "Computer vision that reads hand gestures in real time",
     description: [
-      <>Built a real-time <H>hand gesture recognition model</H> using TensorFlow and OpenCV, achieving 92% accuracy</>,
+      <>Built a real-time <H>hand gesture recognition model</H> with TensorFlow and OpenCV, at <M>92% accuracy</M></>,
     ],
+    stack: ["Python", "TensorFlow", "OpenCV"],
     type: "work",
-  },
-  {
-    id: "qurinom",
-    role: "Mobile App Developer Intern",
-    company: "Qurinom Solutions",
-    period: "Jan 2022 – Mar 2022",
-    description: [
-      <>Architected a <H>full-stack mobile app</H> using Flutter and Firebase with authentication and state management</>,
-    ],
-    type: "work",
-  },
-  {
-    id: "ms",
-    role: "MS Computer Science (Artificial Intelligence)",
-    company: "Binghamton University, SUNY",
-    period: "2024 – 2026",
-    description: [
-      <><H>GPA: 3.7 / 4.0</H></>,
-      <>Focus: AI, Machine Learning, Distributed Systems</>,
-    ],
-    type: "education",
-  },
-  {
-    id: "bs",
-    role: "B.Tech Computer Science (AI & Machine Learning)",
-    company: "Sri Ramachandra University",
-    period: "2020 – 2024",
-    description: [
-      <><H>GPA: 3.69 / 4.0</H></>,
-      <>Specialization: Artificial Intelligence and Machine Learning</>,
-    ],
-    type: "education",
   },
 ];
 
-/* ── Standalone entry so React never re-creates it inside the parent ── */
-function TimelineEntry({ item }: { item: ExperienceType }) {
-  return (
-    <div className="gsap-entry relative flex flex-col gap-1 pl-6 md:flex-row md:gap-0 md:pl-0">
-      {/* Period */}
-      <div className="md:w-32 flex-shrink-0 md:pr-8 md:pt-0.5 md:text-right">
-        <span className="font-mono text-xs tracking-wider text-text-secondary">
-          {item.period}
-        </span>
-      </div>
+const EDUCATION = [
+  {
+    id: "ms",
+    degree: "MS Computer Science",
+    focus: "Artificial Intelligence",
+    school: "Binghamton University, SUNY",
+    period: "2024 – 2026",
+    gpa: "3.7",
+  },
+  {
+    id: "bs",
+    degree: "B.Tech Computer Science",
+    focus: "AI & Machine Learning",
+    school: "Sri Ramachandra University",
+    period: "2020 – 2024",
+    gpa: "3.69",
+  },
+];
 
-      {/* Dot */}
-      <div
-        className={`absolute top-1 h-2.5 w-2.5 rounded-full border-2 bg-background
-          left-[0px] md:left-[calc(8rem-5px)]
-          ${item.type === "work" ? "border-accent" : "border-border"}`}
+/* ── One role: meta on the left, card on the right, node on the line ── */
+function RoleRow({ item, index }: { item: ExperienceType; index: number }) {
+  return (
+    <article id={`exp-${item.id}`} className="gsap-role group relative grid grid-cols-1 gap-3 pl-8 md:grid-cols-[12rem_1fr] md:gap-x-12 md:pl-0">
+      {/* Node */}
+      <span
+        aria-hidden
+        className="gsap-node absolute left-0 top-2 h-3 w-3 -translate-x-1/2 rounded-full bg-background ring-2 ring-soft-hover transition-[background-color,box-shadow] duration-700 ease-butter [&.is-active]:bg-accent [&.is-active]:ring-accent [&.is-active]:shadow-[0_0_0_7px_color-mix(in_srgb,var(--color-accent)_18%,transparent)] md:left-[calc(12rem+1.5rem)]"
       />
 
-      {/* Card */}
-      <div className="gsap-card md:pl-10 flex-1">
-        <div
-          className={`rounded-xl border p-5 transition-colors duration-150
-            ${item.type === "work"
-              ? "border-accent/20 bg-surface hover:border-accent/30"
-              : "border-border bg-surface"
-            }`}
-        >
-          <div className="flex flex-wrap items-center gap-2">
-            <h3 className="font-sans font-semibold text-text-primary">
-              {item.role}
-            </h3>
-            <span className="font-mono text-xs text-text-tertiary">·</span>
-            <span className="font-mono text-xs text-text-secondary">
-              {item.company}
+      {/* Meta */}
+      <div className="md:pt-0.5 md:text-right">
+        <p className="text-sm font-semibold text-text-primary">{item.company}</p>
+        <p className="mt-1 font-mono text-[11px] tracking-wide text-text-tertiary">{item.period}</p>
+        {item.current && (
+          <span className="mt-2.5 inline-flex items-center gap-1.5 rounded-full bg-surface/80 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-text-secondary shadow-soft">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-pop opacity-60" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-pop" />
             </span>
-            <span
-              className={`ml-auto rounded-full px-2.5 py-0.5 font-mono text-xs
-                ${item.type === "work"
-                  ? "bg-accent/10 text-accent"
-                  : "bg-surface-elevated text-text-tertiary"
-                }`}
-            >
-              {item.type === "work" ? "Work" : "Education"}
-            </span>
-          </div>
-          <ul className="mt-3 space-y-1.5">
-            {item.description.map((line, i) => (
-              <li key={i} className="flex items-start gap-2.5 text-sm text-text-secondary">
-                <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-text-tertiary" />
-                <span>{line}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+            Current
+          </span>
+        )}
       </div>
-    </div>
+
+      {/* Card */}
+      <div className="gsap-role-card relative overflow-hidden rounded-2xl bg-surface/80 p-6 shadow-soft backdrop-blur-sm transition-[translate,box-shadow] duration-500 ease-butter hover:-translate-y-1 hover:shadow-soft-lg md:p-8">
+        <span
+          aria-hidden
+          className="pointer-events-none absolute right-5 top-3 select-none font-display text-6xl font-bold leading-none text-accent/10 transition-colors duration-700 ease-butter group-hover:text-accent/20 md:text-7xl"
+        >
+          {String(index + 1).padStart(2, "0")}
+        </span>
+
+        <p className="relative font-mono text-[11px] tracking-widest uppercase text-accent">{item.role}</p>
+
+        {item.tagline && (
+          <h3 className="relative mt-2.5 max-w-xl pr-14 font-display text-xl font-bold leading-snug text-text-primary md:text-2xl">
+            {item.tagline}
+          </h3>
+        )}
+
+        <ul className="relative mt-5 space-y-2.5">
+          {item.description.map((line, i) => (
+            <li key={i} className="flex items-start gap-3.5 text-[15px] leading-relaxed text-text-secondary">
+              <span className="mt-[0.75em] h-px w-4 shrink-0 bg-accent" />
+              <span>{line}</span>
+            </li>
+          ))}
+        </ul>
+
+        {item.stack && <ToolList label="Tech used" items={item.stack} className="relative mt-7" />}
+      </div>
+    </article>
   );
 }
-
-/* ── Section divider label ── */
-function SubLabel({ text }: { text: string }) {
-  return (
-    <div className="flex items-center gap-4 mb-10">
-      <span className="font-mono text-xs tracking-widest uppercase text-text-secondary whitespace-nowrap">
-        {text}
-      </span>
-      <div className="h-px flex-1 bg-border" />
-    </div>
-  );
-}
-
-const workItems = TIMELINE.filter((i) => i.type === "work");
-const eduItems  = TIMELINE.filter((i) => i.type === "education");
 
 export default function Experience() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -158,75 +157,137 @@ export default function Experience() {
     if (!section) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const heading = section.querySelector<HTMLElement>(".gsap-heading");
-    const entries = Array.from(section.querySelectorAll<HTMLElement>(".gsap-entry"));
+    const heading  = section.querySelector<HTMLElement>(".gsap-heading");
+    const timeline = section.querySelector<HTMLElement>(".gsap-timeline");
+    const fill     = section.querySelector<HTMLElement>(".gsap-line-fill");
+    const roles    = Array.from(section.querySelectorAll<HTMLElement>(".gsap-role"));
+    const edu      = Array.from(section.querySelectorAll<HTMLElement>(".gsap-edu"));
 
-    const triggers: ReturnType<typeof ScrollTrigger.create>[] = [];
+    const triggers: ScrollTrigger[] = [];
+    const tweens: gsap.core.Tween[] = [];
 
     if (heading) {
-      triggers.push(
-        ScrollTrigger.create({
-          trigger: section, start: "top 80%", once: true,
-          onEnter: () => gsap.fromTo(heading,
-            { opacity: 0, y: 30 },
-            { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }
-          ),
-        })
-      );
+      triggers.push(ScrollTrigger.create({
+        trigger: section, start: "top 78%", once: true,
+        onEnter: () => gsap.fromTo(heading,
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+        ),
+      }));
     }
 
-    entries.forEach((entry) => {
-      const card = entry.querySelector<HTMLElement>(".gsap-card");
-      if (!card) return;
-      triggers.push(
-        ScrollTrigger.create({
-          trigger: entry, start: "top 88%", once: true,
-          onEnter: () => gsap.fromTo(card,
-            { opacity: 0, x: -30 },
-            { opacity: 1, x: 0, duration: 0.65, ease: "power3.out" }
-          ),
-        })
-      );
+    // Line fills as the timeline passes the middle of the viewport
+    if (timeline && fill) {
+      tweens.push(gsap.fromTo(fill,
+        { scaleY: 0 },
+        {
+          scaleY: 1, ease: "none",
+          scrollTrigger: { trigger: timeline, start: "top 55%", end: "bottom 55%", scrub: 0.5 },
+        }
+      ));
+    }
+
+    roles.forEach((role) => {
+      const card = role.querySelector<HTMLElement>(".gsap-role-card");
+      const node = role.querySelector<HTMLElement>(".gsap-node");
+
+      triggers.push(ScrollTrigger.create({
+        trigger: role, start: "top 88%", once: true,
+        onEnter: () => gsap.fromTo(role,
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 0.9, ease: "power3.out", clearProps: "transform" }
+        ),
+      }));
+
+      // Node lights up when its row reaches the fill line
+      if (node) {
+        triggers.push(ScrollTrigger.create({
+          trigger: card ?? role, start: "top 55%",
+          onEnter:     () => node.classList.add("is-active"),
+          onLeaveBack: () => node.classList.remove("is-active"),
+        }));
+      }
     });
 
-    return () => triggers.forEach((t) => t.kill());
+    if (edu.length) {
+      triggers.push(ScrollTrigger.create({
+        trigger: edu[0], start: "top 88%", once: true,
+        onEnter: () => gsap.fromTo(edu,
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, stagger: 0.1, duration: 0.8, ease: "power3.out", clearProps: "transform" }
+        ),
+      }));
+    }
+
+    return () => {
+      triggers.forEach((t) => t.kill());
+      tweens.forEach((t) => { t.scrollTrigger?.kill(); t.kill(); });
+    };
   }, []);
 
   return (
     <section ref={sectionRef} id="experience" className="py-section">
       <div className="mx-auto max-w-6xl px-6">
-        <SectionLabel index="04" label="Experience" />
+        <SectionLabel index="02" label="Experience" />
 
-        <h2 className="gsap-heading font-display text-4xl font-bold text-text-primary lg:text-5xl">
-          Background
-        </h2>
+        <div className="gsap-heading flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
+          <h2 className="font-display text-4xl font-bold text-text-primary lg:text-5xl">
+            Where I&apos;ve worked
+          </h2>
 
-        {/* ── Work Experience ── */}
-        <div className="mt-14">
-          <SubLabel text="Work Experience" />
-          <div className="relative">
-            <div className="absolute left-0 top-2 bottom-2 w-px bg-border md:left-[8rem]" />
-            <div className="space-y-10">
-              {workItems.map((item) => (
-                <TimelineEntry key={item.id} item={item} />
-              ))}
-            </div>
+          {/* Headline stat — same treatment as the GPA on education cards */}
+          <div className="text-left sm:text-right">
+            <p className="font-display text-4xl font-bold leading-none text-text-primary lg:text-5xl">
+              2<span className="text-accent">+</span>
+            </p>
+            <p className="mt-1.5 font-mono text-[10px] uppercase tracking-widest text-text-tertiary">
+              Years in industry
+            </p>
+          </div>
+        </div>
+
+        {/* ── Work: all roles visible, scroll-filled timeline ── */}
+        <div className="gsap-timeline relative mt-14">
+          <div aria-hidden className="absolute bottom-2 left-0 top-2 w-px bg-border md:left-[calc(12rem+1.5rem)]">
+            <div className="gsap-line-fill absolute inset-0 origin-top bg-accent" />
+          </div>
+          <div className="space-y-10 md:space-y-12">
+            {WORK.map((item, index) => (
+              <RoleRow key={item.id} item={item} index={index} />
+            ))}
           </div>
         </div>
 
         {/* ── Education ── */}
-        <div className="mt-16">
-          <SubLabel text="Education" />
-          <div className="relative">
-            <div className="absolute left-0 top-2 bottom-2 w-px bg-border md:left-[8rem]" />
-            <div className="space-y-10">
-              {eduItems.map((item) => (
-                <TimelineEntry key={item.id} item={item} />
-              ))}
-            </div>
+        <div className="mt-20">
+          <p className="mb-6 font-mono text-xs tracking-widest uppercase text-text-secondary">Education</p>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+            {EDUCATION.map((ed) => (
+              <article
+                key={ed.id}
+                className="gsap-edu group flex items-center justify-between gap-6 rounded-2xl bg-surface/80 p-6 shadow-soft backdrop-blur-sm transition-[translate,box-shadow] duration-500 ease-butter hover:-translate-y-1 hover:shadow-soft-lg"
+              >
+                <div className="flex items-start gap-4">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface-elevated text-accent transition-colors duration-500 ease-butter group-hover:bg-soft">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5" aria-hidden>
+                      <path d="M22 10 12 5 2 10l10 5 10-5z" />
+                      <path d="M6 12v5c3 2 9 2 12 0v-5" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h3 className="font-sans text-base font-semibold text-text-primary">{ed.degree}</h3>
+                    <p className="text-sm text-accent">{ed.focus}</p>
+                    <p className="mt-1.5 text-xs text-text-tertiary">{ed.school} · {ed.period}</p>
+                  </div>
+                </div>
+                <div className="shrink-0 text-right">
+                  <p className="font-display text-3xl font-bold leading-none text-text-primary">{ed.gpa}</p>
+                  <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-text-tertiary">GPA / 4.0</p>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
-
       </div>
     </section>
   );

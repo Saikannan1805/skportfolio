@@ -21,6 +21,12 @@ export interface Experience {
   period: string;
   description: React.ReactNode[];
   type: "work" | "education";
+  /** One-line outcome shown as the card headline */
+  tagline?: string;
+  /** Tools used in this role */
+  stack?: string[];
+  /** Ongoing role — shows a "Current" marker */
+  current?: boolean;
 }
 
 export interface Skill {

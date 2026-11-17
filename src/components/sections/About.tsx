@@ -5,10 +5,10 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import SectionLabel from "@/components/ui/SectionLabel";
 
 const FACTS = [
-  { label: "Focus",    value: "AI / ML · Full-Stack"    },
-  { label: "Status",   value: "Seeking Roles · 2026"    },
-  { label: "Based in", value: "New York"                  },
-  { label: "Open to",  value: "Full Time · Internships · Contract" },
+  { label: "Focus",    value: "AI Engineering · SDE"                },
+  { label: "Status",   value: "Seeking Full-Time Roles · Dec 2026"  },
+  { label: "Based in", value: "New York · Open to Relocate"         },
+  { label: "Open to",  value: "Full Time · Contract"                },
 ];
 
 export default function About() {
@@ -89,30 +89,30 @@ export default function About() {
             <div className="space-y-4 text-text-secondary leading-relaxed">
               <p className="gsap-text">
                 I am a Computer Science Master&apos;s student specializing in AI at
-                Binghamton University.
+                Binghamton University, graduating in December 2026. Right now I am an{" "}
+                <span className="text-text-primary font-medium">AI Engineer Intern at Colaberry</span>, building a{" "}
+                <span className="text-text-primary font-medium">real-time voice agent</span> that talks in 6 languages.
               </p>
               <p className="gsap-text">
-                I have shipped AI-powered products across{" "}
-                <span className="text-text-primary font-medium">multiple companies</span>,
-                building{" "}
-                <span className="text-text-primary font-medium">multi-agent LLM pipelines</span>,
-                deploying{" "}
-                <span className="text-text-primary font-medium">real-time inference systems</span>{" "}
-                and working across the full ML stack.
+                Across four companies I have built{" "}
+                <span className="text-text-primary font-medium">multi-agent LLM pipelines</span>,{" "}
+                <span className="text-text-primary font-medium">real-time voice agents</span>,{" "}
+                <span className="text-text-primary font-medium">recommendation systems</span> and{" "}
+                <span className="text-text-primary font-medium">RAG search</span>, working across the full ML stack.
               </p>
               <p className="gsap-text">
                 It is not just the model. The architecture, the product thinking
                 and the engineering discipline all matter. I take problems from
-                design to deployment and own the outcome end to end.
+                design to deployment, measure the results and own the outcome end to end.
               </p>
             </div>
 
             {/* Quick facts */}
-            <div className="grid grid-cols-2 gap-3 pt-6 border-t border-border">
+            <div className="grid grid-cols-2 gap-3 pt-6">
               {FACTS.map((fact) => (
                 <div
                   key={fact.label}
-                  className="gsap-card rounded-xl border border-border bg-surface p-4"
+                  className="gsap-card rounded-xl bg-surface p-4 shadow-soft"
                 >
                   <p className="font-mono text-[10px] uppercase tracking-widest text-text-secondary">
                     {fact.label}
@@ -128,8 +128,8 @@ export default function About() {
           {/* Photo — 2 cols */}
           <div className="lg:col-span-2 flex items-start justify-center">
             <div className="gsap-photo relative w-full max-w-xs">
-              <div className="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl border border-accent/20" />
-              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl border border-border bg-surface">
+              <div className="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl bg-soft" />
+              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-surface shadow-soft-lg">
                 <img
                   src="/photo.png"
                   alt="Saikannan Sathish"

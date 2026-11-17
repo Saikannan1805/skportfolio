@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import { Grain, ScrollProgress, CursorDot, LinkedInButton } from "@/components/ui";
+import { Backdrop, Grain, ScrollProgress, LinkedInButton } from "@/components/ui";
+import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://saikannan-portfolio.vercel.app";
@@ -89,8 +90,11 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor:  "#080808",
-  colorScheme: "dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F4FAFB" },
+    { media: "(prefers-color-scheme: dark)",  color: "#001F22" },
+  ],
+  colorScheme: "light dark",
 };
 
 const jsonLd = {
@@ -135,16 +139,20 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full scroll-pt-24 antialiased motion-reduce:scroll-auto`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="min-h-full bg-background text-text-primary font-sans">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <Backdrop />
         <Grain />
         <ScrollProgress />
-        <CursorDot />
         <LinkedInButton />
         {children}
         <Analytics />

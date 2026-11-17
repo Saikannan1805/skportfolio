@@ -2,9 +2,10 @@
 
 import React, { useRef, useEffect } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import Button from "@/components/ui/Button";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import SectionLabel from "@/components/ui/SectionLabel";
+import ToolList from "@/components/ui/ToolList";
 import type { Project } from "@/types";
 
 const H = ({ children }: { children: React.ReactNode }) => (
@@ -15,19 +16,18 @@ const H = ({ children }: { children: React.ReactNode }) => (
 const PROJECTS: Project[] = [
   {
     id: "gitwise",
-    title: "Gitwise AI",
-    subtitle: "Agentic Code Intelligence System",
+    title: "Gitwise",
+    subtitle: "AI Codebase Intelligence",
     description: (
       <>
-        Production-deployed AI agent that analyzes any GitHub repository end-to-end. Clones the repo,{" "}
-        <H>embeds into pgvector</H> and runs a{" "}
-        <H>6-node LangGraph pipeline</H> to stream four live reports via SSE - Architecture Mapping,{" "}
-        Security Scanning with severity scores, <H>Code Quality Grading (A-F)</H> and README generation.{" "}
-        RAG chat enables users to query the codebase with exact{" "}
-        <H>file and line-level citations</H> via Groq LLaMA-3.3-70B.
+        Gitwise reads any GitHub repository and explains it back to you. A{" "}
+        <H>six-node LangGraph pipeline</H> clones the repo, maps its architecture, scans for security
+        issues, grades code quality and generates a README. It <H>streams the report live in 30 to 90 seconds</H>.
+        You can then ask questions about the code in plain English and get answers with{" "}
+        <H>exact file and line citations</H>.
       </>
     ),
-    tags: ["LangGraph", "RAG", "Groq", "LLaMA-3.3", "pgvector", "Supabase", "FastAPI", "SSE", "Next.js"],
+    tags: ["LangGraph", "FastAPI", "Next.js 15", "Supabase pgvector", "Groq LLaMA-3.3-70B", "SSE"],
     href: "https://gitwiseai.vercel.app",
     github: "https://github.com/Saikannan1805/github-agent",
     video: "/gitwise-demo.mp4",
@@ -35,49 +35,139 @@ const PROJECTS: Project[] = [
   },
   {
     id: "hybrid-rag",
-    title: "Hybrid RAG System",
-    subtitle: "Semantic Document Q&A Engine",
+    title: "Hybrid Knowledge Assistant",
+    subtitle: "Full-Stack RAG over Your Documents",
     description: (
       <>
-        Document Q&A system built on a <H>modular RAG pipeline</H>. Handles end-to-end{" "}
-        <H>ingestion, chunking and embedding</H> via OpenAI into Supabase pgvector.{" "}
-        FastAPI backend exposes REST endpoints for document upload and{" "}
-        <H>contextual question answering with citation tracking and confidence scoring</H>.{" "}
-        Streamed responses end-to-end via SSE to a Next.js frontend.
+        A <H>full-stack RAG assistant</H> that answers questions from your own documents. Add PDFs, text
+        files or URLs, and it chunks and embeds the content into Supabase pgvector. Answers come from
+        GPT-4o-mini with <H>citations and a confidence score</H>, streamed live from FastAPI to a Next.js
+        frontend. You can also <H>limit a search to a single document</H>.
       </>
     ),
-    tags: ["RAG", "OpenAI", "pgvector", "Supabase", "FastAPI", "SSE", "Next.js"],
+    tags: ["FastAPI", "Next.js", "Supabase pgvector", "OpenAI embeddings", "GPT-4o-mini", "SSE"],
     href: "https://rag-assist-system.vercel.app/",
     github: "https://github.com/Saikannan1805/basic-rag-assistant",
     image: "/rag-chat.png",
     featured: true,
   },
-  {
-    id: "courser-ai",
-    title: "Courser AI",
-    subtitle: "Full-Stack EdTech AI Platform",
-    description: (
-      <>
-        Built <H>0→1 as founding engineer</H> - full-stack AI platform for automated syllabus generation using{" "}
-        <H>LLM pipelines.</H> Integrated <H>OpenRouter and Gemini APIs</H> for real-time content generation and editing.{" "}
-        Flask + PostgreSQL backend deployed on Railway. Shipped bulk CSV import, resource management and enrollment workflows,{" "}
-        <H>onboarding early users</H> and iterating on feedback.
-      </>
-    ),
-    tags: ["OpenRouter", "Gemini API", "React", "Flask", "PostgreSQL"],
-    customMedia: (
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span
-          className="font-mono text-5xl font-bold text-accent select-none"
-          style={{ textShadow: "0 0 40px rgba(99,102,241,0.6), 0 0 80px rgba(99,102,241,0.3)" }}
-        >
-          {"< / >"}
-        </span>
-      </div>
-    ),
-    featured: true,
-  },
 ];
+
+const hostname = (url?: string) => {
+  if (!url) return null;
+  try {
+    return new URL(url).hostname;
+  } catch {
+    return null;
+  }
+};
+
+/* ── Media in a minimal, tonal browser window ── */
+function ProjectWindow({ project }: { project: Project }) {
+  const host = hostname(project.href);
+
+  return (
+    <div className="overflow-hidden rounded-2xl bg-surface-elevated">
+      {/* Window bar */}
+      <div className="flex h-9 items-center gap-1.5 px-4">
+        <span className="h-2 w-2 rounded-full bg-soft-hover" />
+        <span className="h-2 w-2 rounded-full bg-soft-hover" />
+        <span className="h-2 w-2 rounded-full bg-soft-hover" />
+        {host && (
+          <span className="mx-auto max-w-[60%] truncate rounded-full bg-surface/70 px-3 py-0.5 font-mono text-[10px] text-text-tertiary">
+            {host}
+          </span>
+        )}
+      </div>
+
+      <div className="relative aspect-[16/10] w-full overflow-hidden">
+        <div className="absolute inset-0 transition-transform duration-[900ms] ease-butter group-hover:scale-[1.04]">
+          {project.video ? (
+            <video
+              src={project.video}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 h-full w-full object-cover object-top"
+            />
+          ) : project.image ? (
+            <Image
+              src={project.image}
+              alt={`${project.title} screenshot`}
+              fill
+              className="object-cover object-top"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          ) : (
+            project.customMedia
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  return (
+    <article className="gsap-project group flex flex-col rounded-3xl bg-surface/80 p-3 shadow-soft backdrop-blur-sm transition-[translate,box-shadow] duration-500 ease-butter hover:-translate-y-1.5 hover:shadow-soft-lg">
+      <ProjectWindow project={project} />
+
+      <div className="flex flex-1 flex-col px-4 pb-4 pt-7 md:px-5">
+        {/* Index + links */}
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-xs text-accent">{String(index + 1).padStart(2, "0")}</span>
+            <span className="h-px w-6 bg-soft-hover transition-all duration-700 ease-butter group-hover:w-12 group-hover:bg-accent" />
+          </div>
+
+          <div className="flex items-center gap-2">
+            {project.href && (
+              <Button
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="primary"
+                className="px-4 py-2 text-[13px]"
+              >
+                View live ↗
+              </Button>
+            )}
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${project.title} on GitHub`}
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-surface-elevated text-text-secondary transition-colors duration-[450ms] ease-butter hover:bg-soft hover:text-text-primary"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden>
+                  <path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3" />
+                </svg>
+              </a>
+            )}
+          </div>
+        </div>
+
+        <h3 className="mt-5 font-display text-3xl font-bold leading-tight text-text-primary">
+          {project.title}
+        </h3>
+        {project.subtitle && (
+          <p className="mt-2 font-mono text-[11px] tracking-widest uppercase text-text-tertiary">
+            {project.subtitle}
+          </p>
+        )}
+
+        <p className="mt-5 text-[15px] leading-relaxed text-text-secondary">{project.description}</p>
+
+        {/* Pinned to the bottom so both cards align */}
+        <div className="mt-auto pt-7">
+          <ToolList label="Built with" items={project.tags} />
+        </div>
+      </div>
+    </article>
+  );
+}
 
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -88,30 +178,26 @@ export default function Projects() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const heading = section.querySelector<HTMLElement>(".gsap-heading");
-    const cards   = Array.from(section.querySelectorAll<HTMLElement>(".gsap-card"));
+    const cards   = Array.from(section.querySelectorAll<HTMLElement>(".gsap-project"));
 
-    const triggers: ReturnType<typeof ScrollTrigger.create>[] = [];
+    const triggers: ScrollTrigger[] = [];
 
     if (heading) {
       triggers.push(ScrollTrigger.create({
         trigger: section, start: "top 75%", once: true,
         onEnter: () => gsap.fromTo(heading,
           { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }
+          { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
         ),
       }));
     }
 
     if (cards.length) {
       triggers.push(ScrollTrigger.create({
-        trigger: section, start: "top 72%", once: true,
+        trigger: cards[0], start: "top 85%", once: true,
         onEnter: () => gsap.fromTo(cards,
           { opacity: 0, y: 50 },
-          {
-            opacity: 1, y: 0,
-            stagger: 0.15, duration: 0.8, ease: "power3.out",
-            onComplete: () => gsap.set(cards, { clearProps: "transform,opacity" }),
-          }
+          { opacity: 1, y: 0, stagger: 0.12, duration: 1, ease: "power3.out", clearProps: "transform" }
         ),
       }));
     }
@@ -124,104 +210,13 @@ export default function Projects() {
       <div className="mx-auto max-w-6xl px-6">
         <SectionLabel index="03" label="Projects" />
 
-        <div className="gsap-heading flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-          <h2 className="font-display text-4xl font-bold text-text-primary lg:text-5xl">
-            Selected work
-          </h2>
-        </div>
+        <h2 className="gsap-heading font-display text-4xl font-bold text-text-primary lg:text-5xl">
+          Selected work
+        </h2>
 
-        <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6">
           {PROJECTS.map((project, index) => (
-            <motion.article
-              key={project.id}
-              whileHover={{ y: -8 }}
-              transition={{ type: "spring", stiffness: 300, damping: 22 }}
-              className="gsap-card group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-colors duration-300 hover:border-accent/25 hover:shadow-2xl hover:shadow-accent/5"
-            >
-              {/* Media */}
-              <div
-                className="relative h-48 w-full overflow-hidden border-b border-border"
-                style={{ background: "linear-gradient(145deg, #141414 0%, #0d0d0d 100%)" }}
-              >
-                {project.video ? (
-                  <video
-                    src={project.video}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-                ) : project.image ? (
-                  <Image
-                    src={project.image}
-                    alt={`${project.title} screenshot`}
-                    fill
-                    className="object-cover object-top"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                ) : project.customMedia ? (
-                  project.customMedia
-                ) : (
-                  <span className="absolute left-4 top-4 font-mono text-xs tracking-widest text-text-tertiary">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                )}
-                <div className="absolute bottom-0 left-0 h-px w-0 bg-accent transition-all duration-500 group-hover:w-full" />
-              </div>
-
-              <div className="flex flex-1 flex-col p-6">
-                <div className="mb-4 flex min-h-[5.75rem] flex-wrap content-start gap-1.5">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full bg-surface-elevated px-2.5 py-0.5 font-mono text-xs text-text-secondary"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <h3 className="font-sans text-base font-semibold text-text-primary transition-colors duration-200 group-hover:text-accent">
-                  {project.title}
-                </h3>
-
-                {project.subtitle && (
-                  <p className="mt-0.5 font-mono text-xs tracking-widest uppercase text-text-tertiary">
-                    {project.subtitle}
-                  </p>
-                )}
-
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-text-secondary">
-                  {project.description}
-                </p>
-
-                {(project.href || project.github) && (
-                  <div className="mt-6 flex items-center gap-5 border-t border-border pt-4">
-                    {project.href && (
-                      <a
-                        href={project.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-mono text-xs tracking-widest uppercase text-accent hover:text-accent-light transition-colors duration-150"
-                      >
-                        Live →
-                      </a>
-                    )}
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-mono text-xs tracking-widest uppercase text-text-tertiary hover:text-text-secondary transition-colors duration-150"
-                      >
-                        GitHub →
-                      </a>
-                    )}
-                  </div>
-                )}
-              </div>
-            </motion.article>
+            <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
       </div>

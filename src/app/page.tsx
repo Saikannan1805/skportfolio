@@ -8,9 +8,9 @@ export default function Home() {
       <main className="pt-16">
         <Hero />
         <About />
-        <Stack />
-        <Projects />
         <Experience />
+        <Projects />
+        <Stack />
         <Contact />
       </main>
     </>

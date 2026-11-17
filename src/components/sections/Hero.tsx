@@ -4,13 +4,13 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
 import Button from "@/components/ui/Button";
+import HeroShowcase from "./HeroShowcase";
 
-const FEATURED_TAGS = ["LangGraph", "RAG", "Groq LLaMA-3.3-70B", "FastAPI", "pgvector", "Next.js"];
-
-const FEATURED_STATS = [
-  { label: "Pipeline nodes", value: "6-node" },
-  { label: "Live reports", value: "4 reports" },
-  { label: "Analysis time", value: "30–90s" },
+const IMPACT = [
+  { value: "43.5%",    label: "faster voice replies",    company: "Colaberry",  href: "#exp-colaberry" },
+  { value: "40%",      label: "fewer hallucinations",    company: "PiSence",    href: "#exp-pisence"   },
+  { value: "80%",      label: "lower LLM cost",          company: "PiSence",    href: "#exp-pisence"   },
+  { value: "< 100 ms", label: "recommendation latency",  company: "Uplifty AI", href: "#exp-uplifty"   },
 ];
 
 export default function Hero() {
@@ -27,6 +27,7 @@ export default function Hero() {
         ".hero-bio",
         ".hero-divider",
         ".hero-cta",
+        ".hero-impact",
         ".hero-scroll",
         ".hero-featured",
       ], { opacity: 0 });
@@ -60,6 +61,12 @@ export default function Hero() {
           { opacity: 1, stagger: 0.1, duration: 0.5, ease: "power3.out" },
           "-=0.2"
         )
+        .fromTo(
+          ".hero-impact",
+          { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, stagger: 0.07, duration: 0.6, ease: "power3.out", clearProps: "transform" },
+          "-=0.25"
+        )
         .to(".hero-scroll", { opacity: 1, duration: 0.5, ease: "power2.out" }, "+=0.1");
     },
     { scope: sectionRef }
@@ -71,25 +78,6 @@ export default function Hero() {
       id="home"
       className="relative flex min-h-screen flex-col items-start justify-center overflow-hidden px-6"
     >
-      {/* Background */}
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <div
-          className="absolute inset-0 opacity-[0.35]"
-          style={{
-            backgroundImage: "radial-gradient(circle, #222222 1.5px, transparent 1.5px)",
-            backgroundSize: "28px 28px",
-          }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(to bottom, transparent 55%, #080808 95%)" }}
-        />
-        <div
-          className="absolute -left-40 -top-40 h-[700px] w-[700px] rounded-full blur-[160px]"
-          style={{ background: "rgba(99, 102, 241, 0.12)" }}
-        />
-      </div>
-
       {/* Content */}
       <div className="relative z-10 mx-auto w-full max-w-6xl">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
@@ -99,14 +87,14 @@ export default function Hero() {
             {/* Eyebrow */}
             <div className="hero-eyebrow mb-8 flex items-center gap-3">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-pop opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-pop" />
               </span>
               <p className="font-mono text-xs tracking-widest uppercase text-text-secondary">
                 Available for{" "}
                 <span className="text-text-primary font-medium">full-time roles</span>
                 {" "}·{" "}
-                <span className="text-text-primary font-medium">2026</span>
+                <span className="text-text-primary font-medium">Dec 2026</span>
               </p>
             </div>
 
@@ -136,11 +124,10 @@ export default function Hero() {
 
             {/* Bio */}
             <p className="hero-bio mt-5 max-w-lg text-base leading-relaxed text-text-secondary">
-              <span className="text-text-primary font-medium">Early engineer</span> at{" "}
-              <span className="text-text-primary font-medium">AI startups</span> — shipping{" "}
-              <span className="text-text-primary font-medium">LangGraph agents</span>,{" "}
-              <span className="text-text-primary font-medium">RAG pipelines</span> and{" "}
-              <span className="text-text-primary font-medium">full-stack ML systems</span> to production.
+              I build <span className="text-text-primary font-medium">real-time voice agents</span>,{" "}
+              <span className="text-text-primary font-medium">LangGraph agents</span> and{" "}
+              <span className="text-text-primary font-medium">RAG pipelines</span>, and I measure every
+              one before I ship it.
             </p>
 
             {/* Divider */}
@@ -155,6 +142,27 @@ export default function Hero() {
                 Let&apos;s Talk
               </Button>
             </div>
+
+            {/* Impact strip — each tile jumps to its experience card */}
+            <ul className="mt-10 grid max-w-xl grid-cols-2 gap-2 sm:grid-cols-4" aria-label="Impact highlights">
+              {IMPACT.map((item) => (
+                <li key={item.value + item.label} className="hero-impact">
+                  <a
+                    href={item.href}
+                    aria-label={`${item.value} ${item.label} at ${item.company}: view experience`}
+                    className="group block h-full rounded-xl px-3 py-3 transition-[background-color,box-shadow,translate] duration-[450ms] ease-butter hover:-translate-y-0.5 hover:bg-surface/80 hover:shadow-soft"
+                  >
+                    <span className="block whitespace-nowrap font-display text-2xl font-bold leading-none text-text-primary transition-colors duration-[450ms] ease-butter group-hover:text-accent">
+                      {item.value}
+                    </span>
+                    <span className="mt-2 block text-sm leading-snug text-text-secondary">{item.label}</span>
+                    <span className="mt-1.5 block font-mono text-[11px] tracking-wide text-text-tertiary">
+                      {item.company}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* ── Right: featured project card ── */}
@@ -163,86 +171,11 @@ export default function Hero() {
             <div className="relative isolate">
               <div
                 className="absolute -inset-6 rounded-3xl blur-2xl -z-10"
-                style={{ background: "rgba(99, 102, 241, 0.07)" }}
+                style={{ background: "color-mix(in srgb, var(--color-accent-light) 10%, transparent)" }}
                 aria-hidden
               />
 
-              {/* Card — float animation on this element */}
-              <div
-                className="relative w-full max-w-sm rounded-2xl border border-accent/20 bg-surface p-7"
-                style={{ boxShadow: "0 0 0 1px rgba(99,102,241,0.05) inset" }}
-              >
-                {/* Top shine line */}
-                <div className="absolute inset-x-0 top-0 h-px rounded-t-2xl bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
-
-                {/* Label */}
-                <div className="mb-5 flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  <span className="font-mono text-[10px] tracking-widest uppercase text-accent">
-                    Featured Project
-                  </span>
-                </div>
-
-                {/* Title */}
-                <h3 className="font-display text-2xl font-bold text-text-primary">
-                  Gitwise AI
-                </h3>
-                <p className="mt-0.5 font-mono text-xs tracking-wide text-text-tertiary">
-                  Agentic Code Intelligence System
-                </p>
-
-                {/* Description */}
-                <p className="mt-4 text-sm leading-relaxed text-text-secondary">
-                  Streams <span className="text-text-primary font-medium">real-time codebase intelligence</span> -
-                  architecture mapping, security scanning and code grading with{" "}
-                  <span className="text-text-primary font-medium">RAG-powered repo chat.</span>
-                </p>
-
-                {/* Stat strip */}
-                <div className="mt-5 grid grid-cols-3 divide-x divide-border rounded-xl border border-border bg-background/60 px-1 py-3">
-                  {FEATURED_STATS.map((stat) => (
-                    <div key={stat.label} className="flex flex-col items-center gap-0.5 px-2">
-                      <span className="font-mono text-xs font-semibold text-accent">{stat.value}</span>
-                      <span className="font-mono text-[9px] tracking-wide text-text-tertiary text-center">{stat.label}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Tags */}
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {FEATURED_TAGS.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full bg-surface-elevated px-2.5 py-0.5 font-mono text-xs text-text-secondary"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Divider */}
-                <div className="my-5 h-px w-full bg-border" />
-
-                {/* Links */}
-                <div className="flex items-center gap-5">
-                  <a
-                    href="https://gitwiseai.vercel.app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 font-mono text-xs tracking-widest uppercase text-accent transition-colors duration-200 hover:text-accent-light"
-                  >
-                    View Live ↗
-                  </a>
-                  <a
-                    href="https://github.com/Saikannan1805/github-agent"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 font-mono text-xs tracking-widest uppercase text-text-tertiary transition-colors duration-200 hover:text-text-secondary"
-                  >
-                    GitHub ↗
-                  </a>
-                </div>
-              </div>
+              <HeroShowcase />
             </div>
           </div>
 

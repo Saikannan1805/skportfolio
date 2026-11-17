@@ -15,14 +15,17 @@ export default function Button({
 }: ButtonProps) {
   return (
     <motion.a
-      whileTap={{ scale: 0.95 }}
-      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-full font-mono text-xs tracking-widest uppercase transition-all duration-200 px-6 py-3",
+        "group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-sans text-sm font-medium",
+        "transition-[background-color,color,box-shadow,translate] duration-[450ms] ease-butter",
+        // Tonal fill: pale tint of the hue with deep-shade text; deepens one step and lifts on hover
         variant === "primary" &&
-          "bg-accent text-white hover:bg-accent-light shadow-lg shadow-accent/20 hover:shadow-accent/30",
+          "bg-soft text-on-soft hover:bg-soft-hover hover:-translate-y-px hover:shadow-[0_12px_24px_-14px_var(--color-accent)]",
+        // Ghost: just text, a faint tint fades in behind it
         variant === "ghost" &&
-          "border border-border text-text-secondary hover:border-accent hover:text-accent",
+          "text-text-secondary hover:bg-surface-elevated hover:text-text-primary",
         className
       )}
       {...props}

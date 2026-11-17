@@ -21,7 +21,7 @@ export default function Icon() {
           style={{
             fontSize: 38,
             fontWeight: 800,
-            background: "linear-gradient(135deg, #60A5FA, #818CF8, #6366F1, #A855F7)",
+            background: "linear-gradient(135deg, #3FC1CA, #0FA4AF, #0A7C85)",
             backgroundClip: "text",
             color: "transparent",
             fontFamily: "serif",

@@ -4,12 +4,13 @@ import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { gsap } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const NAV_LINKS = [
   { label: "About",      href: "#about",      id: "about"      },
-  { label: "Stack",      href: "#stack",      id: "stack"      },
-  { label: "Projects",   href: "#projects",   id: "projects"   },
   { label: "Experience", href: "#experience", id: "experience" },
+  { label: "Projects",   href: "#projects",   id: "projects"   },
+  { label: "Stack",      href: "#stack",      id: "stack"      },
   { label: "Contact",    href: "#contact",    id: "contact"    },
 ];
 
@@ -69,7 +70,7 @@ export default function Navbar() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 h-16 transition-all duration-500",
         scrolled
-          ? "bg-background/80 backdrop-blur-xl"
+          ? "bg-background/75 backdrop-blur-xl shadow-[0_1px_0_var(--color-border-subtle)]"
           : "bg-transparent"
       )}
     >
@@ -87,7 +88,7 @@ export default function Navbar() {
               <a
                 href={link.href}
                 className={cn(
-                  "relative font-mono text-xs tracking-widest uppercase transition-colors duration-200 group",
+                  "relative font-mono text-xs tracking-widest uppercase transition-colors duration-[450ms] ease-butter group",
                   activeSection === link.id
                     ? "text-text-primary"
                     : "text-text-secondary hover:text-text-primary"
@@ -96,7 +97,7 @@ export default function Navbar() {
                 {link.label}
                 <span
                   className={cn(
-                    "absolute -bottom-0.5 left-0 h-px bg-accent transition-all duration-300",
+                    "absolute -bottom-0.5 left-0 h-px bg-accent transition-all duration-[450ms] ease-butter",
                     activeSection === link.id ? "w-full" : "w-0 group-hover:w-full"
                   )}
                 />
@@ -106,14 +107,15 @@ export default function Navbar() {
         </ul>
 
         {/* Right side */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
+          <ThemeToggle />
+
           {/* Resume — always visible */}
           <a
             href="/resume"
             target="_blank"
             rel="noopener noreferrer"
-            className="border-shimmer inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 md:px-4 font-mono text-xs tracking-widest uppercase text-text-secondary hover:text-accent transition-colors duration-200"
-            style={{ boxShadow: "0 0 16px rgba(99, 102, 241, 0.35), 0 0 32px rgba(99, 102, 241, 0.15)" }}
+            className="inline-flex items-center gap-1.5 rounded-full bg-surface-elevated px-3 py-1.5 md:px-4 font-mono text-xs tracking-widest uppercase text-text-primary transition-colors duration-[450ms] ease-butter hover:bg-soft"
           >
             Resume ↗
           </a>
@@ -151,7 +153,7 @@ export default function Navbar() {
       {/* Mobile dropdown */}
       <div
         className={cn(
-          "md:hidden absolute inset-x-0 top-16 bg-background/95 backdrop-blur-xl border-b border-border overflow-hidden transition-all duration-300 ease-in-out",
+          "md:hidden absolute inset-x-0 top-16 bg-background/95 backdrop-blur-xl shadow-soft overflow-hidden transition-all duration-300 ease-in-out",
           menuOpen ? "max-h-[26rem] opacity-100" : "max-h-0 opacity-0 pointer-events-none"
         )}
       >
@@ -162,7 +164,7 @@ export default function Navbar() {
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
                 className={cn(
-                  "flex items-center justify-between py-3.5 border-b border-border/40 font-mono text-xs tracking-widest uppercase transition-colors duration-150",
+                  "flex items-center justify-between py-3.5 border-b border-border-subtle font-mono text-xs tracking-widest uppercase transition-colors duration-150",
                   activeSection === link.id
                     ? "text-accent"
                     : "text-text-secondary hover:text-text-primary"
